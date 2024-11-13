@@ -3,6 +3,10 @@ import sys
 #Varaibles
 game_playing = True
 
+monster_random = { "escape" : "You have successfully escaped the monster!" ,
+"die" : "You lost the fight and died!"
+}
+
 crypt = {"riddle" : "I slip through the murk, silent and quick, With scales and teeth, sharp and slick. What am I?" , 
 "puzzle" : "In a swamp, there are 3 frogs on a lily pad. Each frog catches 2 flies. How many flies are caught in total?" ,
 "monster" : "You encounter a Slime! Would you like to run or fight?"
@@ -60,22 +64,43 @@ def dungeon_choosing():
 
 #Dungeon Encounters
 def dungeon_encounter():
+    global game_playing 
     while game_playing:
-        global encounter
         encounter = random.choice(["riddle" , "puzzle" , "monster"])
         print()
         if chosen_dungeon == "Crypt":
             if encounter == "riddle": 
                 print(crypt["riddle"])
                 riddle_answer = input("Be aware but type your answer here: ").lower()
-                if riddle_answer == crypt_answer["riddle]"]:
-                    print("You got it right!")
+                if riddle_answer == crypt_answer["riddle"]:
+                    print("You got it right, lets move on!")
                 else:
                     print("You got it wrong! Prepare to die!")
                     game_playing = False
                     sys.exit
             elif encounter == "puzzle":
-                
+                print(crypt["puzzle"])
+                puzzle_answer = input("Do you have what it takes to not make mistakes: ")
+                if puzzle_answer == crypt_answer["puzzle"]:
+                    print("You got it right, lets move on!")
+                else:
+                    print("You got it wrong! Prepare to die!")
+                    game_playing = False
+                    sys.exit
+            elif encounter == "monster":
+                print(crypt["monster"])
+                monster_answer = input().lower()
+                monster_decision = random.choice(monster_random)
+                if monster_answer == "fight" or "run":
+                    monster_decision
+                    if monster_decision == "You have successfully escaped the monster!":
+                        print("You have successfully escaped the monster!")
+                    else:
+                        print("You have died!")
+                        game_playing = False
+                        sys.exit
+                else:
+                    ("That is not an answer. Fight or Run.")
         print()
         
 
